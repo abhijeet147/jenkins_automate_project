@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Snack Result</title>
+</head>
+<body>
+    <h2>Snack suggestions for a {{ mood }} mood in the {{ time }}:</h2>
+    <ul>
+        {% for snack in suggestions %}
+            <li>{{ snack }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/suggest">Try Again</a>
+</body>
+</html>

@@ -1,20 +1,24 @@
-from app import app
+# snack_data.py
 
-def test_home():
-    tester = app.test_client()
-    response = tester.get('/')
-    assert response.status_code == 200
-    assert b"Welcome to the Healthy Snacking API" in response.data
-
-def test_about():
-    tester = app.test_client()
-    response = tester.get('/about')
-    assert response.status_code == 200
-    assert b"developer" in response.data
-
-def test_suggest_snack():
-    tester = app.test_client()
-    response = tester.get('/suggest?mood=happy')
-    assert response.status_code == 200
-    json_data = response.get_json()
-    assert "suggestions" in json_data
+def get_snacks_by_mood_and_time(mood, time):
+    snack_suggestions = {
+        "happy": {
+            "morning": ["Fruit salad", "Greek yogurt with honey"],
+            "afternoon": ["Granola bar", "Apple slices with peanut butter"],
+            "evening": ["Smoothie", "Popcorn"],
+            "night": ["Dark chocolate", "Warm milk"]
+        },
+        "sad": {
+            "morning": ["Oatmeal with banana", "Chia pudding"],
+            "afternoon": ["Almonds", "Carrot sticks"],
+            "evening": ["Soup", "Herbal tea"],
+            "night": ["Chamomile tea", "Low-fat crackers"]
+        },
+        "tired": {
+            "morning": ["Black coffee", "Boiled eggs"],
+            "afternoon": ["Energy bar", "Fruit juice"],
+            "evening": ["Protein shake", "Yogurt"],
+            "night": ["Warm soup", "Banana"]
+        }
+    }
+    return snack_suggestions.get(mood, {}).get(time, ["Try some fruits or nuts."])
